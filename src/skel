@@ -1,7 +1,8 @@
 #!/bin/bash
 
+# run-shellcheck
 #
-# CIS Debian 7 Hardening
+# CIS Debian Hardening
 #
 
 #
@@ -12,12 +13,12 @@ set -e # One error, it's over
 set -u # One variable unset, it's over
 
 # This function will be called if the script status is on enabled / audit mode
-audit () {
+audit() {
     :
 }
 
 # This function will be called if the script status is on enabled mode
-apply () {
+apply() {
     :
 }
 
@@ -27,15 +28,22 @@ check_config() {
 }
 
 # Source Root Dir Parameter
-if [ ! -r /etc/default/cis-hardening ]; then
-    echo "There is no /etc/default/cis-hardening file, cannot source CIS_ROOT_DIR variable, aborting"
-    exit 128
-else
+if [ -r /etc/default/cis-hardening ]; then
+    # shellcheck source=../../debian/default
     . /etc/default/cis-hardening
-    if [ -z $CIS_ROOT_DIR ]; then
-        echo "No CIS_ROOT_DIR variable, aborting"
-    fi
-fi 
+fi
+if [ -z "$CIS_ROOT_DIR" ]; then
+     echo "There is no /etc/default/cis-hardening file nor cis-hardening directory in current environment."
+     echo "Cannot source CIS_ROOT_DIR variable, aborting."
+    exit 128
+fi
 
 # Main function, will call the proper functions given the configuration (audit, enabled, disabled)
-[ -r $CIS_ROOT_DIR/lib/main.sh ] && . $CIS_ROOT_DIR/lib/main.sh
+if [ -r "$CIS_ROOT_DIR"/lib/main.sh ]; then
+    # shellcheck source=../../lib/main.sh
+    . "$CIS_ROOT_DIR"/lib/main.sh
+else
+    echo "Cannot find main.sh, have you correctly defined your root directory? Current value is $CIS_ROOT_DIR in /etc/default/cis-hardening"
+    exit 128
+fi
+

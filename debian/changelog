@@ -1,3 +1,340 @@
+cis-hardening (3.0-1) unstable; urgency=medium
+
+  * Add workflows for github action
+  * Update man page and README.md
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 18 Jan 2021 09:01:28 +0100
+
+cis-hardening (3.0) unstable; urgency=medium
+
+  * Migration to debian10 numbering
+  * Add utils to compare file permissions to a list of authorized permissions
+  * Update skel, update documentation
+  * Add 1.1.1.7 check and test (disable FAT)
+  * Add 1.1.23 check and test (disable usb storage)
+  * Add 1.7.x checks and tests (apparmor)
+  * Add 2.2.1.2 check and test (systemd-timesyncd)
+  * Add 4.1.1.1,4 check (auditd)
+  * Add 4.2.1.6 check (syslog-ng)
+  * Add 4.2.2.x checks and tests (journald)
+  * Add 4.4 checks and tests (logrotate permission)
+  * Add 5.2.20-23 checks and tests (sshd)
+  * Add 6.1.3-9 checks (/etc/passwd-, /etc/shadow-, ...)
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 04 Jan 2021 08:39:06 +0100
+
+cis-hardening (2.1-6) unstable; urgency=medium
+
+  * Fix typo in 4.1.17 that leads to false positive
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 04 Jan 2021 08:11:29 +0100
+
+cis-hardening (2.1-5) unstable; urgency=medium
+
+  * Fix various shellcheck warnrings and errors
+  * Quote every variables that should be quoted SC2086
+  * Move shfmt
+  * Disable some shellcheck rules like sed replacement by shell expansion SC2001
+  * Replace egrep SC2196
+  * Fix execution of output SC2091
+  * Replace ls by glob in loop SC2045
+  * Add prefix to follow scripts SC1090
+  * Replace -a  by && SC2166
+  * Replace ! -z by -n SC2236
+  * Fix bug on race condition (shoud have been fixed in 2.0-6)
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 14 Dec 2020 16:30:32 +0100
+
+cis-hardening (2.1-4) unstable; urgency=medium
+
+  * Quoting variables to commply with shellcheck SC2086
+  * Add follow files prefixes SC1091
+  * Add unused var disabling SC2034
+  * Add prefix to define shell SC2148
+  * Add run-shellcheck prefixes
+  * Add shfmt to have a consitent way to format the code
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Fri, 04 Dec 2020 14:17:45 +0100
+
+cis-hardening (2.1-3) unstable; urgency=medium
+
+  * Fix permissions on 5.2.3 (authorize 600)
+  * Fix minor bug with --create-config-files-only
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 30 Nov 2020 15:14:17 +0100
+
+cis-hardening (2.1-2) unstable; urgency=medium
+
+  * Add --create-config-files-only mode that only create config files without running audit
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Mon, 23 Nov 2020 13:40:14 +0100
+ 
+cis-hardening (2.1-1) stable; urgency=medium
+  * Move to most recent docker image for buster
+  * Rename 6.1.2,6.1.3,6.1.4 to be CIS9 compliant
+  * Rename 4.5 to 1.6.1.2 to be CIS9 compliant
+  * Fix apt autoremove to be non interactive
+  * Add disclaimer when checks don't require comprehensive checks
+  * Add comprehensive tests for 4.1.x
+  * Add comprehensive tests for 5.2.x
+  * Add comprehensive test for 5.3.x, add config function for the checks, upgrade PAM conf
+  * Add comprehensive tests for 5.4.1.x
+  * Add comprehensive tests for 5.4.3, 5.4.4
+  * Add comprehensive test for 5.6
+  * Skip 4.1.3 on docker (bootloader)
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Fri, 13 Nov 2020 13:32:50 +0100
+
+cis-hardening (2.0-6) unstable; urgency=medium
+
+  * Fix race condition issue with cat /etc/passwd, /etc/shadow, /etc/group
+  * Fix permissions in 5.2.3
+  * Revert 4.2.2.3 to old check (8.2.4)
+
+ -- Thibault Ayanides <thibault.ayanides@owhcloud.com>  Mon, 16 Nov 2020 14:19:35 +0100
+
+cis-hardening (2.0-5) unstable; urgency=medium
+
+  * Hotfix for 3.1.1 wich resulted to a fail check if ipv6 is disabled 
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Thu, 12 Nov 2020 10:15:46 +0100
+
+cis-hardening (2.0-4) unstable; urgency=medium
+  * Add deleted checks during renaming which should be here (3.2.6, 3.2.7, 6.2.7)
+  * Delete 4.2.2, duplicate with 4.2.3
+  * Fix bug in hardening.sh final printf when locals are not US
+  * Improve 4.2.4 to use utils.sh functions
+  * Add 2.3.18 to check for telnet sever (not anymore in CIS hardening)
+  * Fix 2.2.12 where the condition was inverted
+  * Skip IPV6 checks if IPv6 is disabled
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Fri, 28 Oct 2020 16:12:34 +0100
+
+cis-hardening (2.0-3) unstable; urgency=medium
+
+  * Add comprehensive tests for 6.1.x
+  * Add comprehensive tests for 6.2.x
+  * Add comprehensive tests for 5.1.x (except 5.1.1)
+  * Add comprehensive tests for 5.2.1, 5.2.2, 5.2.3
+  * Add skippable tests (for docker)
+  * Skip 99.2 on docker (USB devices disabling)
+  * Skip 1.4.1, 1.4.2, 1.4.3 on docker (bootloader)
+  * Skip 1.1.21, 6.1.10 on docker (world writable)
+  * Skip 8.0 on docker (kernel)
+  * Skip 1.5.1 on docker (kernel)
+  * Skip 1.1.1.x (filesystem, needs kernel)
+  * Clean old num 3.2 and 8.2.4 tests (checks were already deleted)
+  * Clean 13.13 (same as 6.2.9)
+  * Rename 7.7 to 3.5 (not explicitely in CIS)
+  * Rename 8.2.1 to 4.2.2 (not explicitely in CIS)
+  * Rename 2.18 and 2.23 to 1.1.1.6 and 1.1.1.7 (not explicitely in CIS 9)
+  * Rename 1.7.1.4 (falsly named warning_banners, now motd_perm)
+  * Add netsat to docker images to fix 2.2.15 tests
+  * Fix 5.2.2 and 5.2.3 (it's cleaner now)
+  * Fix 6.2.9 unbound variable
+
+ -- Thibault Ayanides <thibault.ayanides@ovhcloud.com>  Wed, 28 Oct 2020 09:28:18 +0100
+
+cis-hardening (2.0-2) unstable; urgency=medium
+
+  * FIX: change name to fit check content (cracklib -> pwquality)
+  * CLEAN: remove 8.2.4
+  * CLEAN(12.x) remove unused checks that were merged with ownsership/perms
+  * IMP(3.2.1-2): set sysctl params in config file
+  * Fix typos
+  * FIX(2.2.12) handle smbd as a service
+
+ -- Charles Herlin <charles.herlin@corp.ovh.com>  Wed, 30 Oct 2019 15:42:19 +0100
+
+cis-hardening (2.0-1) unstable; urgency=medium
+
+  * Add missing tests CUPS, telnet and LDAP
+  * Renum 2.6.x to 1.1.x for /var/tmp
+  * Renum logrotate config 8.4 to 4.3
+  * Renumbering custom 99.* scripts as newcomers to CIS benchmark
+  * Renum User and Groups settings 13.x to 6.2.x
+  * Renum 12.x checks to 6.1.x Verify_System_File_Permissions
+  * Renum warning banners checks 11.x to 1.7.x
+  * Renum 10.x to 5.4.x
+  * Renum login.defs 10.1.x to 5.4.1.x
+  * Renum 9.x tty and su checks
+  * Renum ssh config check 9.3.x to 5.2.x
+  * Renum 9.2.x to 5.3.x Pam password settings
+  * Renum 9.1.x to 5.1.x cron checks
+  * Renum 8.2.x to 4.2.2.x for syslog-ng
+  * Renum 8.1.x auditing configuration
+  * Renumber 7.5.x and 7.6
+  * Renumber 7.4.x tcp wrappers
+  * Renumber network params 7.1.x, 7.2.x and 7.3
+  * Renumber special purpose services 6.x
+  * Renumbering OS services checks and removing obsolete ones
+  * Renumbering 4.x checks
+  * Renumbering of bootloader checks
+  * First batch of renaming to comply to comply to 8v2 and 9 pdf
+
+ -- Charles Herlin <charles.herlin@corp.ovh.com>  Wed, 23 Oct 2019 14:07:13 +0200
+ 
+cis-hardening (1.3-4) unstable; urgency=medium
+
+  * ADD(1.3.1): Install Ossec
+  * ADD(4.2.3): Syslog-ng install
+  * ADD(4.2.4): Logs permissions
+  * ADD(5.2.2, 5.2.3): SSH host keys permissions and ownership
+  * ADD(5.2.17): SSHD login grace time
+
+ -- Thibault AYANIDES <thibault.ayanides@ovhcloud.com>  Mon, 19 Oct 2020 16:31:48 +0200
+
+cis-hardening (1.3-3) unstable; urgency=medium
+
+  * changelog: update changelog
+  * IMP(12.8,12.9,12.10,12.11): be able to exclude some paths
+
+ -- Benjamin MONTHOUËL <benjamin.monthouel@ovhcloud.com>  Mon, 30 Mar 2020 19:12:03 +0200
+
+cis-hardening (1.3-2) unstable; urgency=medium
+
+  * IMP(test/13.12): ignore the phony '/nonexistent' home folder
+
+ -- Stéphane Lesimple <stephane.lesimple@corp.ovh.com>  Tue, 22 Oct 2019 15:15:34 +0200
+
+cis-hardening (1.3-1) unstable; urgency=medium
+
+  * Change of version numbering
+
+ -- Charles Herlin <charles.herlin@corp.ovh.com>  Wed, 28 Aug 2019 14:57:33 +0200
+
+cis-hardening (1.2-6) unstable; urgency=medium
+
+  * FIX(test/10.2): backup and restore /etc/passwd after test
+  * IMP(99.3.1): improve check with disabled passwords
+  * FIX(10.2): improve test to check multiple login shells
+
+ -- Charles Herlin <charles.herlin@corp.ovh.com>  Wed, 28 Aug 2019 12:34:52 +0200
+
+cis-hardening (1.2-5) unstable; urgency=medium
+
+  * fix(99.4): do not stderr iptables warning on buster
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Wed, 14 Aug 2019 10:34:15 +0200
+
+cis-hardening (1.2-4) unstable; urgency=medium
+
+  * changelog: update changelog
+  * FIX(99.1): remove dot in files to search
+  * FIX(13.15): fix code that did not show duplicated group
+  * FIX(99.5.4): fix regex to allow other authkey options than "from"
+  * FIX(batch): sed \n to space in batch echo
+
+ -- Charles Herlin <charles.herlin@corp.ovh.com>  Thu, 04 Apr 2019 16:14:44 +0200
+
+cis-hardening (1.2-3) unstable; urgency=medium
+
+  * Debian release 1.2-3
+  * 99.5.4: add conf to check only listed users (bastions)
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Wed, 06 Mar 2019 08:29:30 +0100
+
+cis-hardening (1.2-2) unstable; urgency=medium
+
+  * Debian release 1.2-2
+  * FIX(8.2.4): script crashed when touching a logfile in subdir of /var/log
+  * IMP(8.2.4): add exceptions in check and apply
+  * IMP(8.2.5): follow symlinks in find
+  * FIX(8.3.2): add $SUDO_CMD to find
+  * FIX(8.2.5): grep: x is a directory
+  * FEAT(2.6.x): retrieve actual partition in case if bind mount
+  * CHORE: replace `==` with `=` that is bash syntax
+  * CHORE(test 8.2.5): removed useless cleanup line
+  * FIX(9.3.2): dismiss test for initial after e7d9977
+  * FIX(12.1x): fix tests exception for mail after da6acb0b
+  * CHORE(2.1x): use "readlink -e" instead of custom func
+  * IMP(9.3.2): Comply with Debian9 guide: verbose ssh loglevel
+  * IMP(13.13): improve exception detection
+  * IMP(9.3.2): Add custom configuration management
+  * IMP(13.13): Add exceptions for home directories not owned by owner
+  * IMP(8.2.5): find multiline pattern in files (syslog)
+  * IMP(2.1x): Retrieve actual partition when symlink
+  * FIX(tests): change sed to audit in test skeleton after 81f9348
+  * FIX CONFIG_AUDIT test
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Thu, 28 Feb 2019 12:55:15 +0100
+
+cis-hardening (1.2-1) unstable; urgency=medium
+
+  * CHORE(tests): cleanup test files
+  * FIX(tests): change sed in conf file disabled->audit following d6172ad
+  * CHORE(tests): Cleanup test files
+  * FIX(tests): improve test cases and cleanup
+  * FIX(99.2): add missing $SUDO_CMD
+  * FIX(sudoers): add missing `test`
+  * FIX(test): catch return values when retval differs to avoid runtime error
+  * Add test stub for all audit checks, to tests root/sudo consistency
+  * Rename dismiss_test to skip_tests since test won't even run in this case
+  * dismiss_count will still report failed root/sudo consistency failure
+  * properly purge remaining config files on purge
+  * Change default status to audit for file with custom `create_config`
+  * Change default status disabled -> audit when no conf file
+  * FIX package name in example-cron.d-entry
+  * Improve user management in test cases
+  * IMP: enhance scripts that check duplicate UID
+  * FIX: usage if no RUN_MODE, fix only that used to run too many checks
+  * changelog: Update to 1.2-1 (go cds go)
+  * Migrate generic checks from secaudit to cis-hardening
+  * Add crontab
+  * FIX: add becho to send batch output to syslog too
+  * Update debian 7/8/9 in help files and remove in generic scripts
+  * IMP: sort find result by name and version to ease reading
+  * FIX: remove "exernal-sources" option when running shellcheck
+  * Add shellcheck recommendation
+  * FIX: add way of completely skipping test that bugged with jessie
+  * Fix typo in test skeleton and add shellcheck comment
+  * FIX: bug crashing for undeclared variable when consitency checks failed
+  * IMP: tests readability and runtime error handling
+  * IMP: new tag in file to tell that the script should pass shellcheck
+  * FIX: tests return value that was always 255
+  * FIX: quotes in find command, misinterpreted shellcheck advice
+  * FEAT: Add sudo_wrapper to catch unauthorized sudo commands
+  * FEAT: automate shellcheck test with docker
+  * FIX: sed that was too greedy
+  * Add missing /usr/bin/su
+  * FIX: add /usr/bin/* path for suid/guid allowed binaries
+  * Adding batch mode to output just one line of text (no colors) in order to be parsed by computer tools
+  * Change from CIS reco and only warn (no crit) if logfile does not exist
+  * IMP(test): Add feature to run functional tests in docker instance
+  * Improve --only option to perform only specified test and no other lookalike test number
+  * Redirect stderr to avoid printing "no such file" error
+  * resolve #SOC-30 Also check /etc/security/limits.d/ for core dump limit
+  * Fix SOC-28, add test if file exist, if not issue error
+  * Add sudo management in main and utils
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Tue, 12 Feb 2019 11:39:44 +0100
+
+cis-hardening (1.1-1) unstable; urgency=low
+
+  * Add hardening templating and several enhancements
+  * CIS_ROOT_DIR management
+  * Update ciphers list in 9.3.11 with latest chacha20 and gcm ciphers
+  * Debian packaging clean up
+
+ -- Julien Delayen <julien.delayen@corp.ovh.com>  Fri, 02 Feb 2018 09:38:31 +0100
+
+cis-hardening (1.0-11) jessie; urgency=low
+
+  * fixed option name in 9.3.9_disable_sshd_permitemptypasswords.sh
+  * [10.2] Fixed result parsing in case of spaces in passwd list
+  * [Debian 8] Fixed comments for debian 8 compliance
+  * [10.1.3] set the good value for $OPTIONS
+  * set a fixed-size prefix for logger
+  * handle ENOENT properly in does_pattern_exist_in_file\(\)
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Mon, 05 Jun 2017 14:32:56 +0200
+
+cis-hardening (1.0-10) wheezy; urgency=low
+
+  * Script output should be useful with pipe or redirection
+
+ -- Kevin Tanguy <kevin.tanguy@ovh.net>  Wed, 18 May 2016 08:38:35 +0200
+
 cis-hardening (1.0-9) wheezy; urgency=low
 
   * Fixed replace in file function with proper substitution
